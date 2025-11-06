@@ -1,18 +1,22 @@
 import funcoes_auxiliares
 import leitor_arquivo
 
-def merge_sorter(lista : list):
+def merge_sorter(lista : list, alunos=[], pontos=[]):
+    if len(alunos) == 0 or len(pontos) == 0:
+        alunos = leitor_arquivo.retorna_alunos()
+        pontos = leitor_arquivo.retorna_pontos()
+
     if len(lista) > 1:
         metade = len(lista) // 2
         lista_1 = lista[:metade]
         lista_2 = lista[metade:]
         lista.clear()
 
-        merge_sorter(lista_1)
-        merge_sorter(lista_2)
+        merge_sorter(lista_1, alunos, pontos)
+        merge_sorter(lista_2, alunos, pontos)
 
         while len(lista_1) > 0 and len(lista_2) > 0:
-            if menor_que(lista_1[0], lista_2[0]):
+            if menor_que(lista_1[0], lista_2[0], alunos, pontos):
                 elem = lista_1.pop(0)
             else:
                 elem = lista_2.pop(0)
@@ -24,15 +28,18 @@ def merge_sorter(lista : list):
             lista.extend(lista_1)
 
 
-def menor_que(aluno_1, aluno_2):
-    alunos = leitor_arquivo.retorna_alunos()
+def menor_que(aluno_1, aluno_2, alunos=[], pontos=[]):
+    if len(alunos) == 0 or len(pontos) == 0:
+        print(len(alunos) == 0, len(pontos) == 0)
+        alunos = leitor_arquivo.retorna_alunos()
+        pontos = leitor_arquivo.retorna_pontos()
 
     matricula_1 = aluno_1[0]
     matricula_2 = aluno_2[0]
 
     # Tenta verificar pelo 1º critério: pontos
-    pontos_1 = funcoes_auxiliares.total_pontos(matricula_1)
-    pontos_2 = funcoes_auxiliares.total_pontos(matricula_2)
+    pontos_1 = funcoes_auxiliares.total_pontos(matricula_1, alunos, pontos)
+    pontos_2 = funcoes_auxiliares.total_pontos(matricula_2, alunos, pontos)
     if pontos_1 != pontos_2: return pontos_1 < pontos_2
 
     # Tenta verificar pelo 2º critério: nome
@@ -62,11 +69,14 @@ def menor_que(aluno_1, aluno_2):
 
 
 def verifica_se_ordenada(lista):
+    alunos = leitor_arquivo.retorna_alunos()
+    pontos = leitor_arquivo.retorna_pontos()
+
     for index in range(len(lista) - 1):
         elem_1 = lista[index]
         elem_2 = lista[index + 1]
 
-        if not menor_que(elem_1, elem_2) and elem_1 != elem_2:
+        if not menor_que(elem_1, elem_2, alunos, pontos) and elem_1 != elem_2:
             return False
     
     return True

@@ -1,18 +1,20 @@
 import pickle
 
+caminho_arquivo = r"entrada4.bin"
+
 def retorna_tipos():
-    with open(r"entrada1.bin", "rb") as arquivo:
+    with open(caminho_arquivo, "rb") as arquivo:
         return pickle.load(arquivo)
     
 
 def retorna_pontos():
-    with open(r"entrada1.bin", "rb") as arquivo:
+    with open(caminho_arquivo, "rb") as arquivo:
         _ = pickle.load(arquivo)
         return pickle.load(arquivo)
     
 
 def retorna_alunos():
-    with open(r"entrada1.bin", "rb") as arquivo:
+    with open(caminho_arquivo, "rb") as arquivo:
         _ = pickle.load(arquivo)
         _ = pickle.load(arquivo)
         return pickle.load(arquivo)
