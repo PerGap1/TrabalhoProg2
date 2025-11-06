@@ -1,18 +1,18 @@
 import pickle
 
 def retorna_tipos():
-    with open(r"TrabalhoProg2/entrada1.bin", "rb") as arquivo:
+    with open(r"entrada1.bin", "rb") as arquivo:
         return pickle.load(arquivo)
     
 
 def retorna_pontos():
-    with open(r"TrabalhoProg2/entrada1.bin", "rb") as arquivo:
+    with open(r"entrada1.bin", "rb") as arquivo:
         _ = pickle.load(arquivo)
         return pickle.load(arquivo)
     
 
 def retorna_alunos():
-    with open(r"TrabalhoProg2/entrada1.bin", "rb") as arquivo:
+    with open(r"entrada1.bin", "rb") as arquivo:
         _ = pickle.load(arquivo)
         _ = pickle.load(arquivo)
         return pickle.load(arquivo)
