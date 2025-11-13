@@ -20,3 +20,26 @@ def total_pontos(matricula, alunos=[], pontos=[]):
 
     # Máximo 15 pontos
     return soma_pontos if soma_pontos < 15 else 15
+
+
+def saida(lista, arquivo=None):
+    dicionario_alunos = leitor_arquivo.retorna_alunos()
+    dicionario_pontos = leitor_arquivo.retorna_pontos()
+    matricula_anterior = 0
+
+    for matricula, index_atividade in lista:
+        nome, lista_atividades = dicionario_alunos[matricula]
+        tipo_ativ, codigo_ativ, unidades = lista_atividades[index_atividade]
+        nome_ativ, pontos_por_ativ, _ = dicionario_pontos[(tipo_ativ, codigo_ativ)]
+
+        soma_pontos = total_pontos(matricula)
+
+        if matricula != matricula_anterior:
+           arquivo.write(f"{nome} ({matricula}): {soma_pontos} pontos\n")
+
+        arquivo.write(f"\t{tipo_ativ}.{codigo_ativ} {nome_ativ}: {unidades}x{pontos_por_ativ}={unidades * pontos_por_ativ}")
+
+        if (matricula, index_atividade) != lista[-1]:
+            arquivo.write("\n")
+
+        matricula_anterior = matricula

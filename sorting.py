@@ -40,7 +40,7 @@ def menor_que(aluno_1, aluno_2, alunos=[], pontos=[]):
     # Tenta verificar pelo 1º critério: pontos
     pontos_1 = funcoes_auxiliares.total_pontos(matricula_1, alunos, pontos)
     pontos_2 = funcoes_auxiliares.total_pontos(matricula_2, alunos, pontos)
-    if pontos_1 != pontos_2: return pontos_1 < pontos_2
+    if pontos_1 != pontos_2: return pontos_1 > pontos_2
 
     # Tenta verificar pelo 2º critério: nome
     nome_1 = alunos[matricula_1][0]
