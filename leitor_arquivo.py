@@ -1,6 +1,6 @@
 import pickle
 
-caminho_arquivo = r"entrada3.bin"
+caminho_arquivo = r"entrada4.bin"
 
 def retorna_tipos():
     with open(caminho_arquivo, "rb") as arquivo:

@@ -26,10 +26,10 @@ def total_pontos(matricula, alunos={}, pontos={}):
 
     for chave in dicionario_tipos:
         quantidade = dicionario_tipos[chave]
-        if quantidade > 10:
+        if quantidade < 10:
             soma_pontos += quantidade
         else:
-            soma_pontos += quantidade
+            soma_pontos += 10
 
     # Máximo 15 pontos
     return soma_pontos if soma_pontos < 15 else 15

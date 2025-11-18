@@ -52,17 +52,22 @@ def merge_sorter(lista: list, alunos:list=None, pontos:list=None):
         merge_sorter(lista_1, alunos, pontos)
         merge_sorter(lista_2, alunos, pontos)
 
-        while len(lista_1) > 0 and len(lista_2) > 0:
-            if menor_que(lista_1[0], lista_2[0], alunos, pontos):
-                elem = lista_1.pop(0)
-            else:
-                elem = lista_2.pop(0)
-            lista.append(elem)
+        merge(lista, lista_1, lista_2, alunos, pontos)
 
-        if len(lista_1) == 0:
-            lista.extend(lista_2)
+
+def merge(lista, lista_1, lista_2, alunos, pontos):
+    while len(lista_1) > 0 and len(lista_2) > 0:
+        if menor_que(lista_1[0], lista_2[0], alunos, pontos):
+            elem = lista_1.pop(0)
         else:
-            lista.extend(lista_1)
+            elem = lista_2.pop(0)
+        lista.append(elem)
+
+    if len(lista_1) == 0:
+        lista.extend(lista_2)
+    else:
+        lista.extend(lista_1)
+
 
 def menor_que(aluno_1, aluno_2, alunos:list, pontos:list):
     matricula_1 = aluno_1[0]
