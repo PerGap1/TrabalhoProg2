@@ -41,6 +41,7 @@ def merge(l, lEsq, lDir, alunos:list, pontos:list):
         j += 1
         k += 1
 
+
 def menor_que(aluno_1, aluno_2, alunos:list, pontos:list):
     matricula_1 = aluno_1[0]
     matricula_2 = aluno_2[0]
