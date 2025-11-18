@@ -18,6 +18,8 @@ def teste(modo):
     t1 = time()
     if modo == "merge":
         sorting.merge_sorter(lista)
+    if modo == "merge_h":
+        sorting.merge_sorter(lista)
     if modo == "quick":
         sorting.quick_sorter(lista)
     if modo == "quick_r":
@@ -36,8 +38,5 @@ def main():
         # funcoes_auxiliares.saida(lista, arquivo)
 
 if __name__ == "__main__":
-    t1 = time()
     main()
-    t2 = time()
-
-    print(f"{(t2 - t1):.2f}")
+    

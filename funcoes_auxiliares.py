@@ -1,10 +1,6 @@
 import leitor_arquivo
 
-def total_pontos(matricula, alunos={}, pontos={}):
-    if len(alunos) == 0 or len(pontos) == 0:
-        pontos = leitor_arquivo.retorna_pontos()
-        alunos = leitor_arquivo.retorna_alunos()
-
+def total_pontos(matricula, alunos, pontos):
     # Garante que o aluno está no dicionário
     if matricula not in alunos:
         return -1

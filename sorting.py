@@ -2,67 +2,44 @@ import funcoes_auxiliares
 import leitor_arquivo
 import random
 
-def quick_sorter(lista: list, inf=0, sup=None, alunos:list=None, pontos:list=None, random_pivot=False):
-    
+def merge_sorter(l, alunos:list=None, pontos:list=None):
     if alunos is None or pontos is None:
         alunos = leitor_arquivo.retorna_alunos()
         pontos = leitor_arquivo.retorna_pontos()
 
-    if sup is None: 
-        sup = len(lista)-1
+    if len(l) > 1:
+        meio = len(l) // 2
+        lEsq = l[:meio]
+        lDir = l[meio:]
 
-    if inf < sup:
-        pos = qs_particao(lista, inf, sup, alunos, pontos, random_pivot)
-        quick_sorter(lista, inf, pos-1, alunos, pontos)
-        quick_sorter(lista, pos+1, sup, alunos, pontos)
+        merge_sorter(lEsq, alunos, pontos) 
+        merge_sorter(lDir, alunos, pontos)
 
-def qs_particao(l, inf, sup, alunos:list, pontos:list, random_pivot):
-    # --- NEW: choose pivot randomly ---
-    if random_pivot:
-        p = random.randint(inf, sup)
-        l[inf], l[p] = l[p], l[inf]
-    # ----------------------------------
+        merge(l, lEsq, lDir, alunos, pontos)
 
-    pivot = l[inf]
-    i = inf + 1
-    j = sup
+def merge(l, lEsq, lDir, alunos:list, pontos:list):
+    i = 0
+    j = 0
+    k = 0
 
-    while i <= j:
-        while i <= j and (l[i] == pivot or menor_que(l[i], pivot, alunos, pontos)):
+    while i < len(lEsq) and j < len(lDir):
+        if menor_que(lEsq[i], lDir[j], alunos, pontos):
+            l[k] = lEsq[i]
             i += 1
-        while j >= i and (l[j] != pivot and not menor_que(l[j], pivot, alunos, pontos)):
-            j -= 1
-        if i < j: 
-            l[i], l[j] = l[j] , l[i]
-
-    l[inf], l[j] = l[j], l[inf]
-    return j
-
-def merge_sorter(lista: list, alunos:list=None, pontos:list=None):
-    if alunos is None or pontos is None:
-        alunos = leitor_arquivo.retorna_alunos()
-        pontos = leitor_arquivo.retorna_pontos()
-
-    if len(lista) > 1:
-        metade = len(lista) // 2
-        lista_1 = lista[:metade]
-        lista_2 = lista[metade:]
-        lista.clear()
-
-        merge_sorter(lista_1, alunos, pontos)
-        merge_sorter(lista_2, alunos, pontos)
-
-        while len(lista_1) > 0 and len(lista_2) > 0:
-            if menor_que(lista_1[0], lista_2[0], alunos, pontos):
-                elem = lista_1.pop(0)
-            else:
-                elem = lista_2.pop(0)
-            lista.append(elem)
-
-        if len(lista_1) == 0:
-            lista.extend(lista_2)
         else:
-            lista.extend(lista_1)
+            l[k] = lDir[j]
+            j += 1
+        k += 1
+    
+    while i < len(lEsq):
+        l[k] = lEsq[i]
+        i += 1
+        k += 1
+
+    while j < len(lDir):
+        l[k] = lDir[j]
+        j += 1
+        k += 1
 
 def menor_que(aluno_1, aluno_2, alunos:list, pontos:list):
     matricula_1 = aluno_1[0]
