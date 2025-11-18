@@ -1,6 +1,5 @@
 import funcoes_auxiliares
 import leitor_arquivo
-import random
 
 def merge_sorter(l, alunos:list=None, pontos:list=None):
     if alunos is None or pontos is None:
