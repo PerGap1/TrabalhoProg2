@@ -26,10 +26,13 @@ def teste():
 def main():
     lista = leitor_arquivo.retorna_lista_principal()
     sorting.merge_sorter(lista)
-    
-    with open(r"saida.txt", "w") as arquivo:
-        funcoes_auxiliares.saida(lista, arquivo)
+
+    # with open(r"saida.txt", "w") as arquivo:
+        # funcoes_auxiliares.saida(lista, arquivo)
 
 if __name__ == "__main__":
+    t1 = time()
     main()
-    # teste()
+    t2 = time()
+
+    print(f"{(t2 - t1):.2f}")

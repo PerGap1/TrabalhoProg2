@@ -29,11 +29,6 @@ def merge_sorter(lista : list, alunos=[], pontos=[]):
 
 
 def menor_que(aluno_1, aluno_2, alunos=[], pontos=[]):
-    if len(alunos) == 0 or len(pontos) == 0:
-        print(len(alunos) == 0, len(pontos) == 0)
-        alunos = leitor_arquivo.retorna_alunos()
-        pontos = leitor_arquivo.retorna_pontos()
-
     matricula_1 = aluno_1[0]
     matricula_2 = aluno_2[0]
 
