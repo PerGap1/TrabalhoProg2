@@ -1,7 +1,7 @@
 import leitor_arquivo, sorting, funcoes_auxiliares
 from time import time
 
-def teste():
+def teste(modo):
     '''
     Aqui dá pra fazer um teste inicial do sistema
     Pra mudar o tamanho do arquivo usado, vai em leitor_arquivo,
@@ -16,9 +16,14 @@ def teste():
     print("Ordenada") if sorting.verifica_se_ordenada(lista) else print("Não ordenada")
 
     t1 = time()
-    sorting.merge_sorter(lista)
+    if modo == "merge":
+        sorting.merge_sorter(lista)
+    if modo == "quick":
+        sorting.quick_sorter(lista)
+    if modo == "quick_r":
+        sorting.quick_sorter(lista, random_pivot=True)
     t2 = time()
-
+    
     print("Ordenada") if sorting.verifica_se_ordenada(lista) else print("Não ordenada")
     print(f"Tempo: {(t2 - t1):.3f} segundos")
 
@@ -32,4 +37,8 @@ def main():
 
 if __name__ == "__main__":
     main()
-    # teste()
+    #teste("merge")
+    #print()
+    #teste("quick")
+    #print()
+    #teste("quick_r")

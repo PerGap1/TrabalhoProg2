@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 # A primeira é chamada pra iniciar o gráfico, e ela retorna bars, que deve ser armazenado e usado depois
 # A segunda recebe as bars (colunas do gráfico), e atualiza o gráfico já montado com os novos dados passados
 
+
 def iniciar_grafico(lista, tipo):
     input("Confirmar")
     plt.clf()
@@ -18,3 +19,5 @@ def atualizar_grafico(bars, lista, passo):
         bar.set_height(val)
     plt.title(f"Passo {passo}")
     plt.pause(0.00001)
+
+iniciar_grafico
