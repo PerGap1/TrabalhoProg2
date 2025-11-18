@@ -1,8 +1,45 @@
 import funcoes_auxiliares
 import leitor_arquivo
+import random
 
-def merge_sorter(lista : list, alunos=[], pontos=[]):
-    if len(alunos) == 0 or len(pontos) == 0:
+def quick_sorter(lista: list, inf=0, sup=None, alunos:list=None, pontos:list=None, random_pivot=False):
+    
+    if alunos is None or pontos is None:
+        alunos = leitor_arquivo.retorna_alunos()
+        pontos = leitor_arquivo.retorna_pontos()
+
+    if sup is None: 
+        sup = len(lista)-1
+
+    if inf < sup:
+        pos = qs_particao(lista, inf, sup, alunos, pontos, random_pivot)
+        quick_sorter(lista, inf, pos-1, alunos, pontos)
+        quick_sorter(lista, pos+1, sup, alunos, pontos)
+
+def qs_particao(l, inf, sup, alunos:list, pontos:list, random_pivot):
+    # --- NEW: choose pivot randomly ---
+    if random_pivot:
+        p = random.randint(inf, sup)
+        l[inf], l[p] = l[p], l[inf]
+    # ----------------------------------
+
+    pivot = l[inf]
+    i = inf + 1
+    j = sup
+
+    while i <= j:
+        while i <= j and (l[i] == pivot or menor_que(l[i], pivot, alunos, pontos)):
+            i += 1
+        while j >= i and (l[j] != pivot and not menor_que(l[j], pivot, alunos, pontos)):
+            j -= 1
+        if i < j: 
+            l[i], l[j] = l[j] , l[i]
+
+    l[inf], l[j] = l[j], l[inf]
+    return j
+
+def merge_sorter(lista: list, alunos:list=None, pontos:list=None):
+    if alunos is None or pontos is None:
         alunos = leitor_arquivo.retorna_alunos()
         pontos = leitor_arquivo.retorna_pontos()
 
@@ -27,8 +64,7 @@ def merge_sorter(lista : list, alunos=[], pontos=[]):
         else:
             lista.extend(lista_1)
 
-
-def menor_que(aluno_1, aluno_2, alunos=[], pontos=[]):
+def menor_que(aluno_1, aluno_2, alunos:list, pontos:list):
     matricula_1 = aluno_1[0]
     matricula_2 = aluno_2[0]
 
