@@ -2,7 +2,7 @@ def compara():
     with open("saida.txt", "r") as arquivo:
         nossa_saida = arquivo.readlines()
 
-    with open("saida4.txt", "r") as arquivo:
+    with open("modelos_saida\saida4.txt", "r") as arquivo:
         saida1 = arquivo.readlines()
 
     cont = 0
